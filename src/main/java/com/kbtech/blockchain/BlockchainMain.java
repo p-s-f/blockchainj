@@ -14,7 +14,7 @@ public class BlockchainMain {
     int million = 0;
 
     System.out.println(String.format("Input: %s   -- Hash: %s", input, hash));
-    while (!isValidHashDifficulty(hash, 6)) {
+    while (!isValidHashDifficulty(hash, 7, false)) {
       nonce = nonce + 1;
       msg = String.format("%s%s", input, nonce);
       hash = hashToSHA256(msg);
