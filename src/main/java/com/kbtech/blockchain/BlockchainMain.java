@@ -15,10 +15,10 @@ public class BlockchainMain {
 
     System.out.println(String.format("Input: %s   -- Hash: %s", input, hash));
     while (!isValidHashDifficulty(hash, 7, false)) {
-      nonce = nonce + 1;
+      nonce ++;
       msg = String.format("%s%s", input, nonce);
       hash = hashToSHA256(msg);
-      attempt++;
+      attempt ++;
       if (attempt%1000000 == 0) {
         million++;
         System.out.println(String.format("%s million hashes!", million));
