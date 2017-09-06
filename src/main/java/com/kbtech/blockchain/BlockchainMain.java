@@ -10,7 +10,7 @@ public class BlockchainMain {
     String input = "jeff the dog ate the cat when he went out in witby";
     String msg = "";
     String hash = hashToSHA256(input);
-    float attempt = 0;
+    double attempt = 0;
     int million = 0;
 
     System.out.println(String.format("Input: %s   -- Hash: %s", input, hash));
