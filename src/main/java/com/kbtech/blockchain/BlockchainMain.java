@@ -6,7 +6,7 @@ import static com.kbtech.blockchain.util.HashUtil.isValidHashDifficulty;
 public class BlockchainMain {
 
   public static void main(String[] args) {
-    int nonce = 0;
+    double nonce = 0;
     String input = "jeff the dog ate the cat when he went out in witby";
     String msg = "";
     String hash = hashToSHA256(input);
