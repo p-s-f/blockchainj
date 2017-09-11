@@ -29,7 +29,7 @@ public class BlockChain {
   }
 
   public void addBlock(final Block block) {
-    currentIndex.add(BigInteger.valueOf(1));
+    currentIndex = currentIndex.add(BigInteger.valueOf(1));
     blockChain.put(currentIndex, block);
     logger.info(String.format("Added block to chain [%s]", block));
   }
@@ -44,5 +44,9 @@ public class BlockChain {
 
   public BigInteger getCurrentIndex() {
     return currentIndex;
+  }
+
+  public BigInteger getChainLength() {
+    return getCurrentIndex().add(BigInteger.valueOf(1));
   }
 }

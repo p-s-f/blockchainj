@@ -22,6 +22,7 @@ public class BlockchainMain {
       blockChain.addBlock(nextBlock);
       previousBlock = nextBlock;
       logger.info("added block to blockChain");
+      logger.info(String.format("blockchain length is now [%s] blocks!", blockChain.getChainLength()));
     }
   }
 
