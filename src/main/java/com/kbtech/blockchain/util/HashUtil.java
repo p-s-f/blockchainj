@@ -1,10 +1,10 @@
 package com.kbtech.blockchain.util;
 
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import org.apache.log4j.Logger;
 
 public class HashUtil {
+
+  final static Logger logger = Logger.getLogger(HashUtil.class);
 
   public HashUtil() {
   }
@@ -13,16 +13,14 @@ public class HashUtil {
     return org.apache.commons.codec.digest.DigestUtils.sha256Hex(text);
   }
 
-  public static boolean isValidHashDifficulty(final String hash, final int difficulty, boolean output) {
+  public static boolean isValidHashDifficulty(final String hash, final int difficulty) {
     StringBuilder howManyZero = new StringBuilder(256);
 
     for (int i = 0; i < hash.length(); i++) {
       if (hash.charAt(i) != '0') {
-        if (output) {
           if (howManyZero.length() > 3) {
-            System.out.println(howManyZero);
+            logger.debug(howManyZero);
           }
-        }
         return i >= difficulty;
       } else {
         howManyZero.append("0");
