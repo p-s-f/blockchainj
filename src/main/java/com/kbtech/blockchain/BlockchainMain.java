@@ -11,7 +11,8 @@ public class BlockchainMain {
 
     // init new blockchain
     BlockChain blockChain = BlockChain.getInstance();
-    Block genesisBlock = mineGenesisBlock();
+    BlockchainMain blockchainMain = new BlockchainMain();
+    Block genesisBlock = blockchainMain.mineGenesisBlock();
     blockChain.addBlock(genesisBlock);
     Miner miner = new Miner();
     String previousHash = genesisBlock.getHash();
@@ -31,7 +32,7 @@ public class BlockchainMain {
     }
   }
 
-  private static Block mineGenesisBlock() {
+  private Block mineGenesisBlock() {
     Miner miner = new Miner();
     Block genesisBlock = miner.mineBlock( "Genesis Block!", 4, "", 0);
     return genesisBlock;
