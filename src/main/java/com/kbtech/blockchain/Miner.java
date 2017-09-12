@@ -2,8 +2,6 @@ package com.kbtech.blockchain;
 
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
-
-import java.math.BigInteger;
 import java.util.Date;
 
 import static com.kbtech.blockchain.util.HashUtil.hashToSHA256;
@@ -19,7 +17,7 @@ public class Miner {
     return mineBlock(input, difficulty, previousHash, BlockChain.getInstance().getCurrentIndex());
   }
 
-  Block mineBlock(final String input, final int difficulty, final String previousHash, final BigInteger index) {
+  Block mineBlock(final String input, final int difficulty, final String previousHash, final long index) {
     double nonce = 0;
     String msg = "";
     String hash = hashToSHA256(input);
@@ -36,8 +34,8 @@ public class Miner {
 
     while (!isValidHashDifficulty(hash, difficulty)) {
       nonce++;
-      msg = String.format("%s%s", input, nonce);
-      hash = hashToSHA256(index + previousHash + timestamp + msg + nonce);
+      million++;
+      hash = hashToSHA256(String.format("%s%s%s%s%s",index , previousHash , timestamp , input , nonce));
       attempt++;
       if (attempt % 1000000 == 0) {
         million++;
@@ -50,7 +48,10 @@ public class Miner {
 
     stopWatch.split();
     logger.info(String.format("got it! - took [%ss]", (stopWatch.getSplitTime()) / 1000));
-
+    String msgToHash = String.format("%s%s%s%s%s", index, previousHash, timestamp, input, nonce);
+    logger.info(String.format("HASHING %s", msgToHash));
+    String compHash = hashToSHA256(msgToHash);
+    logger.info(String.format("COMPHASH %s", compHash));
     stopWatch.stop();
 
     logger.info(String.format("Input: %s   - Hash: %s", msg, hash));
