@@ -48,10 +48,7 @@ public class Miner {
 
     stopWatch.split();
     logger.info(String.format("got it! - took [%ss]", (stopWatch.getSplitTime()) / 1000));
-    String msgToHash = String.format("%s%s%s%s%s", index, previousHash, timestamp, input, nonce);
-    logger.info(String.format("HASHING %s", msgToHash));
-    String compHash = hashToSHA256(msgToHash);
-    logger.info(String.format("COMPHASH %s", compHash));
+
     stopWatch.stop();
 
     logger.info(String.format("Input: %s   - Hash: %s", msg, hash));
