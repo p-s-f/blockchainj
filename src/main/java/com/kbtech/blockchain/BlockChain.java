@@ -54,7 +54,7 @@ public class BlockChain {
   }
 
   public void validateChain() throws BlockChainCorruptedException {
-    for (long i=0; i<=currentIndex; i++) {
+    for (long i=0; i<currentIndex; i++) {
       try {
         Block currentBlock = getBlock(i);
         String previousHash = currentBlock.getPreviousHash();
