@@ -28,7 +28,8 @@ public class BlockchainMain {
     try {
       blockChain.validateChain();
     } catch (BlockChainCorruptedException e) {
-      e.printStackTrace();
+      logger.fatal("OH NOES - SOMEONE IS HACKING WITH YOUR CHAIN!");
+      System.exit(1);
     }
   }
 
