@@ -1,10 +1,7 @@
 package com.kbtech.blockchain;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
-
 import java.util.Date;
 
-@Immutable
 public class Block {
 
   final private String previousHash;
