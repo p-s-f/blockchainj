@@ -8,15 +8,17 @@ import java.util.List;
 public class BlockchainMain {
 
   final static Logger logger = Logger.getLogger(BlockchainMain.class);
+  final static int difficulty = 5;
 
   public static void main(String[] args) {
 
     // init new blockchain
-    BlockChain blockChain = BlockChain.getInstance();
-    BlockchainMain blockchainMain = new BlockchainMain();
-    Block genesisBlock = blockchainMain.mineGenesisBlock();
+    final Miner miner = new Miner();
+    final BlockChain blockChain = BlockChain.getInstance();
+    final BlockchainMain blockchainMain = new BlockchainMain();
+    final long startTime = System.currentTimeMillis();
+    final Block genesisBlock = blockchainMain.mineGenesisBlock(miner);
     blockChain.addBlock(genesisBlock);
-    Miner miner = new Miner();
     String previousHash = genesisBlock.getHash();
     for (int i=0; i < 20; i++) {
       Ledger instance = Ledger.getInstance();
@@ -36,15 +38,15 @@ public class BlockchainMain {
 
     try {
       blockChain.validateChain();
+      final long timeTook = (System.currentTimeMillis() - startTime) / 1000;
+      logger.info((String.format("Took %s seconds to generate 20 valid blocks at a difficulty level of [%s]", timeTook, difficulty)));
     } catch (BlockChainCorruptedException e) {
       logger.fatal("OH NOES - SOMEONE IS HACKING WITH YOUR CHAIN!");
       System.exit(1);
     }
   }
 
-  private Block mineGenesisBlock() {
-    Miner miner = new Miner();
-    Block genesisBlock = miner.mineBlock( "Genesis Block!", 4, "", 0);
-    return genesisBlock;
+  private Block mineGenesisBlock(Miner miner) {
+    return miner.mineBlock( "Genesis Block!", difficulty, "", 0);
   }
 }
