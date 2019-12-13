@@ -9,11 +9,11 @@ public class Block {
 
   final private String previousHash;
   final private Date timeStamp;
-  final private String data;
+  final private Ledger data;
   final private String hash;
   final private double nonce;
 
-  public Block(final String previousHash, final Date timeStamp, final String data, final String hash, final double nonce) {
+  public Block(final String previousHash, final Date timeStamp, final Ledger data, final String hash, final double nonce) {
     this.previousHash = previousHash;
     this.timeStamp = timeStamp;
     this.data = data;
@@ -29,7 +29,7 @@ public class Block {
     return timeStamp;
   }
 
-  public String getData() {
+  public Ledger getData() {
     return data;
   }
 

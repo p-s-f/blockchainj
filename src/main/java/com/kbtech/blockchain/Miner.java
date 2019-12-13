@@ -3,6 +3,7 @@ package com.kbtech.blockchain;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
 import java.util.Date;
+import java.util.List;
 
 import static com.kbtech.blockchain.util.HashUtil.hashToSHA256;
 import static com.kbtech.blockchain.util.HashUtil.isValidHashDifficulty;
@@ -13,14 +14,14 @@ public class Miner {
 
   public Miner() {}
 
-  Block mineBlock(final String input, final int difficulty, final String previousHash) {
+  Block mineBlock(final List<String> input, final int difficulty, final String previousHash) {
     return mineBlock(input, difficulty, previousHash, BlockChain.getInstance().getCurrentIndex());
   }
 
-  Block mineBlock(final String input, final int difficulty, final String previousHash, final long index) {
+  Block mineBlock(final List<String> input, final int difficulty, final String previousHash, final long index) {
     double nonce = 0;
     String msg = "";
-    String hash = hashToSHA256(input);
+    String hash = hashToSHA256(input.toString());
     double attempt = 0;
     int million = 0;
     Date timestamp = new Date();
