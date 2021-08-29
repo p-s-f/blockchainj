@@ -1,10 +1,11 @@
 package com.kbtech.blockchain.util;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class HashUtil {
 
-  final static Logger logger = Logger.getLogger(HashUtil.class);
+  final static Logger logger = LogManager.getLogger(HashUtil.class);
 
   public HashUtil() {
   }

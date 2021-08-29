@@ -1,16 +1,17 @@
 package com.kbtech.blockchain;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Date;
-import java.util.List;
 
 import static com.kbtech.blockchain.util.HashUtil.hashToSHA256;
 import static com.kbtech.blockchain.util.HashUtil.isValidHashDifficulty;
 
 public class Miner {
 
-  final static Logger logger = Logger.getLogger(Miner.class);
+  final static Logger logger = LogManager.getLogger(Miner.class);
 
   public Miner() {}
 

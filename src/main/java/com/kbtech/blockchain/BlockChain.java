@@ -2,11 +2,11 @@ package com.kbtech.blockchain;
 
 import com.kbtech.blockchain.exceptions.BlockChainCorruptedException;
 import com.kbtech.blockchain.exceptions.BlockNotFoundException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.kbtech.blockchain.util.HashUtil.hashToSHA256;
@@ -17,7 +17,7 @@ public class BlockChain {
   private long currentIndex = 0;
 
   private static BlockChain instance;
-  final static Logger logger = Logger.getLogger(BlockChain.class);
+  final static Logger logger = LogManager.getLogger(BlockChain.class);
 
   private BlockChain() {}
 

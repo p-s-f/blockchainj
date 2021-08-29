@@ -1,14 +1,12 @@
 package com.kbtech.blockchain;
 
 import com.kbtech.blockchain.exceptions.BlockChainCorruptedException;
-import org.apache.log4j.Logger;
-
-import java.util.Arrays;
-import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BlockchainMain {
 
-  final static Logger logger = Logger.getLogger(BlockchainMain.class);
+  final static Logger logger = LogManager.getLogger(BlockchainMain.class);
   final static int difficulty = 4;
 
   public static void main(String[] args) {
