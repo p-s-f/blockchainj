@@ -4,51 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-//public class Ledger {
-
-//    private static List<String> ledger = new LinkedList<>();
-////    private Ledger() { }
-////
-////    private static Ledger instance;
-////    private static boolean activated = false;
-////
-////    private static void createInstance() {
-////        instance = new Ledger();
-////        activated = true;
-////    }
-////
-////    public static Ledger getInstance() {
-////        if (!activated) {
-////            createInstance();
-////        }
-////        return instance;
-////    }
-////
-//    public static void storeMessage(String message) throws Exception {
-//        ledger.add(message);
-//    }
-//
-//    public static List<String> getLedger() {
-//        return ledger;
-//    }
-//
-//
-//    private static Ledger instance = null;
-//
-//    private Ledger() {}
-//
-//    public static Ledger getInstance() {
-//        if (instance == null) {
-//            synchronized(Ledger.class) {
-//                if (instance == null) {
-//                    instance = new Ledger();
-//                }
-//            }
-//        }
-//
-//        return instance;
-//    }
-
+@Singleton
 public class Ledger {
 
     private Ledger() { }

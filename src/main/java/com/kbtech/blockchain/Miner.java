@@ -14,11 +14,11 @@ public class Miner {
 
   public Miner() {}
 
-  Block mineBlock(final List<String> input, final int difficulty, final String previousHash) {
+  Block mineBlock(final String input, final int difficulty, final String previousHash) {
     return mineBlock(input, difficulty, previousHash, BlockChain.getInstance().getCurrentIndex());
   }
 
-  Block mineBlock(final List<String> input, final int difficulty, final String previousHash, final long index) {
+  Block mineBlock(final String input, final int difficulty, final String previousHash, final long index) {
     double nonce = 0;
     String msg = "";
     String hash = hashToSHA256(input.toString());

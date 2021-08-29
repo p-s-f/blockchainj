@@ -3,12 +3,13 @@ package com.kbtech.blockchain;
 import com.kbtech.blockchain.exceptions.BlockChainCorruptedException;
 import org.apache.log4j.Logger;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class BlockchainMain {
 
   final static Logger logger = Logger.getLogger(BlockchainMain.class);
-  final static int difficulty = 5;
+  final static int difficulty = 4;
 
   public static void main(String[] args) {
 
@@ -21,14 +22,14 @@ public class BlockchainMain {
     blockChain.addBlock(genesisBlock);
     String previousHash = genesisBlock.getHash();
     for (int i=0; i < 20; i++) {
-      Ledger instance = Ledger.getInstance();
-      try {
-        int rand = (int) Math.random();
-        instance.storeMessage(String.format("%s jeff the dog ate the cat when he went out in witby",rand));
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-      Block nextBlock = miner.mineBlock(instance.getLedger(), 4, previousHash);
+//      Ledger instance = Ledger.getInstance();
+//      try {
+//        int rand = (int) Math.random();
+//        instance.storeMessage(String.format("%s jeff the dog ate the cat when he went out in witby",rand));
+//      } catch (Exception e) {
+//        e.printStackTrace();
+//      }
+      Block nextBlock = miner.mineBlock("jeff the dog ate the cat when he went out in witby", 4, previousHash);
       logger.info("Mined a block");
       blockChain.addBlock(nextBlock);
       previousHash = nextBlock.getHash();
@@ -47,6 +48,6 @@ public class BlockchainMain {
   }
 
   private Block mineGenesisBlock(Miner miner) {
-    return miner.mineBlock( "Genesis Block!", difficulty, "", 0);
+    return miner.mineBlock("Genesis Block!", difficulty, "", 0);
   }
 }
