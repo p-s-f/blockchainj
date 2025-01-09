@@ -13,7 +13,7 @@ import static com.kbtech.blockchain.util.HashUtil.hashToSHA256;
 
 public class BlockChain {
 
-  private Map<Long, Block> blockChain = new HashMap<Long, Block>();
+  private final Map<Long, Block> blockChain = new HashMap<Long, Block>();
   private long currentIndex = 0;
 
   private static BlockChain instance;
@@ -34,13 +34,13 @@ public class BlockChain {
 
   public void addBlock(final Block block) {
     blockChain.put(currentIndex, block);
-    logger.info(String.format("Added block to chain [%s]", block));
+    logger.info("Added block to chain [{}]", block);
     currentIndex++;
   }
 
   public Block getBlock(final long index) throws BlockNotFoundException {
     if (blockChain.containsKey(index)) {
-      logger.debug(String.format("Found block index: [%s]", index));
+      logger.debug("Found block index: [{}]", index);
       return blockChain.get(index);
     }
     throw new BlockNotFoundException();
@@ -64,7 +64,7 @@ public class BlockChain {
         String hash = currentBlock.getHash();
         double nonce = currentBlock.getNonce();
         String msgToHash = String.format("%s%s%s%s%s", i, previousHash , timeStamp , data , nonce);
-        logger.info(String.format("HASHING %s", msgToHash));
+        logger.info("HASHING {}", msgToHash);
         String compHash = hashToSHA256(msgToHash);
         if (!compHash.equalsIgnoreCase(hash)) {
           logger.fatal("BLOCKCHAIN HAS BECOME CORRUPTED!");

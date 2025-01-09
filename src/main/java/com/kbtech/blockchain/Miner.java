@@ -22,12 +22,12 @@ public class Miner {
   Block mineBlock(final String input, final int difficulty, final String previousHash, final long index) {
     double nonce = 0;
     String msg = "";
-    String hash = hashToSHA256(input.toString());
+    String hash = hashToSHA256(input);
     double attempt = 0;
     int million = 0;
     Date timestamp = new Date();
 
-    logger.info(String.format("Input: %s  --  PreviousHash: %s  --  Hash: %s", input, previousHash, hash));
+    logger.info("Input: {}  --  PreviousHash: {}  --  Hash: {}", input, previousHash, hash);
 
     StopWatch stopWatch = new StopWatch();
     stopWatch.start();
@@ -42,22 +42,21 @@ public class Miner {
       if (attempt % 1000000 == 0) {
         million++;
         long timeDiff = (stopWatch.getTime() - currentTime) / 1000;
-        logger.debug(String.format("%s million hashes! took [%ss]", million, timeDiff));
+        logger.debug("{} million hashes! took [{}s]", million, timeDiff);
         currentTime = stopWatch.getTime();
       }
-      logger.trace(String.format("Input: %s   - Hash: %s", msg, hash));
+      logger.trace("Input: {}   - Hash: {}", msg, hash);
     }
 
     stopWatch.split();
-    logger.info(String.format("got it! - took [%ss]", (stopWatch.getSplitTime()) / 1000));
+    logger.info("got it! - took [{}s]", (stopWatch.getSplitTime()) / 1000);
 
     stopWatch.stop();
 
-    logger.info(String.format("Input: %s   - Hash: %s", msg, hash));
-    logger.info(String.format("Input: %s  -  Nonce: %s  -  Hash: %s", input, nonce, hash));
+    logger.info("Input: {}   - Hash: {}", msg, hash);
+    logger.info("Input: {}  -  Nonce: {}  -  Hash: {}", input, nonce, hash);
 
-    Block minedBlock = new Block(previousHash, timestamp, input, hash, nonce);
-    return minedBlock;
+      return new Block(previousHash, timestamp, input, hash, nonce);
   }
 
 }

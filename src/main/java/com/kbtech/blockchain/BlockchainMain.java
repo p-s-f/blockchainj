@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 public class BlockchainMain {
 
   final static Logger logger = LogManager.getLogger(BlockchainMain.class);
-  final static int difficulty = 4;
+  final static int difficulty = 7;
 
   public static void main(String[] args) {
 
@@ -20,19 +20,19 @@ public class BlockchainMain {
     blockChain.addBlock(genesisBlock);
     String previousHash = genesisBlock.getHash();
     for (int i=0; i < 20; i++) {
-//      Ledger instance = Ledger.getInstance();
-//      try {
-//        int rand = (int) Math.random();
-//        instance.storeMessage(String.format("%s jeff the dog ate the cat when he went out in witby",rand));
-//      } catch (Exception e) {
-//        e.printStackTrace();
-//      }
+      Ledger instance = Ledger.getInstance();
+      try {
+        int rand = (int) Math.random();
+        instance.storeMessage(String.format("%s jeff the dog ate the cat when he went out in witby",rand));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
       Block nextBlock = miner.mineBlock("jeff the dog ate the cat when he went out in witby", 4, previousHash);
       logger.info("Mined a block");
       blockChain.addBlock(nextBlock);
       previousHash = nextBlock.getHash();
       logger.info("added block to blockChain");
-      logger.info(String.format("blockchain length is now [%s] blocks!", blockChain.getChainLength()));
+      logger.info("blockchain length is now [{}] blocks!", blockChain.getChainLength());
     }
 
     try {
