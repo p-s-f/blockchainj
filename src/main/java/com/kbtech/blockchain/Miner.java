@@ -36,12 +36,11 @@ public class Miner {
 
     while (!isValidHashDifficulty(hash, difficulty)) {
       nonce++;
-      million++;
       hash = hashToSHA256(String.format("%s%s%s%s%s",index , previousHash , timestamp , input , nonce));
       attempt++;
       if (attempt % 1000000 == 0) {
         million++;
-        long timeDiff = (stopWatch.getTime() - currentTime) / 1000;
+        long timeDiff = (stopWatch.getTime() - currentTime);
         logger.debug("{} million hashes! took [{}s]", million, timeDiff);
         currentTime = stopWatch.getTime();
       }
@@ -56,7 +55,7 @@ public class Miner {
     logger.info("Input: {}   - Hash: {}", msg, hash);
     logger.info("Input: {}  -  Nonce: {}  -  Hash: {}", input, nonce, hash);
 
-      return new Block(previousHash, timestamp, input, hash, nonce);
+    return new Block(previousHash, timestamp, input, hash, nonce);
   }
 
 }

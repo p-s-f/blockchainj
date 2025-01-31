@@ -54,6 +54,23 @@ public class BlockChain {
     return currentIndex+1;
   }
 
+  /**
+   * Validates the integrity of the blockchain by iterating through all the blocks and ensuring
+   * that the hash of each block is correctly calculated and matches the stored hash value.
+   *
+   * This method recalculates the hash of each block based on its properties (index, previous hash,
+   * timestamp, data, and nonce) and compares the computed hash with the stored hash to detect any
+   * corruption. If a mismatch is detected, a {@code BlockChainCorruptedException} is thrown,
+   * indicating that the blockchain has been tampered with or corrupted.
+   *
+   * If no mismatches are found, the blockchain is considered valid.
+   *
+   * Any {@code BlockNotFoundException} encountered while retrieving a block will be caught
+   * and its stack trace will be printed, but this does not interrupt the validation process
+   * for the rest of the blockchain.
+   *
+   * @throws BlockChainCorruptedException if corruption is detected in the blockchain.
+   */
   public void validateChain() throws BlockChainCorruptedException {
     for (long i=0; i<currentIndex; i++) {
       try {

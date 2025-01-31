@@ -19,9 +19,9 @@ public class HashUtil {
 
     for (int i = 0; i < hash.length(); i++) {
       if (hash.charAt(i) != '0') {
-          if (howManyZero.length() > 3) {
-            logger.debug(howManyZero);
-          }
+//          if (howManyZero.length() > 3) {
+//            logger.debug(howManyZero);
+//          }
         return i >= difficulty;
       } else {
         howManyZero.append("0");

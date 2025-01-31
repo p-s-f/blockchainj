@@ -4,6 +4,9 @@ import com.kbtech.blockchain.exceptions.BlockChainCorruptedException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class BlockchainMain {
 
   final static Logger logger = LogManager.getLogger(BlockchainMain.class);
@@ -37,8 +40,11 @@ public class BlockchainMain {
 
     try {
       blockChain.validateChain();
-      final long timeTook = (System.currentTimeMillis() - startTime) / 1000;
-      logger.info((String.format("Took %s seconds to generate 20 valid blocks at a difficulty level of [%s]", timeTook, difficulty)));
+      final double timeTookSeconds = (System.currentTimeMillis() - startTime) / 1000.0;
+      BigDecimal timeTookMinutes = BigDecimal.valueOf(timeTookSeconds / 60)
+              .setScale(1, RoundingMode.HALF_UP);
+       logger.info((String.format("Took %s minutes to generate 20 valid blocks at a difficulty level of [%s]", timeTookMinutes, difficulty)));
+        logger.info((String.format("Took %s seconds to generate 20 valid blocks at a difficulty level of [%s]", timeTookSeconds, difficulty)));
     } catch (BlockChainCorruptedException e) {
       logger.fatal("OH NOES - SOMEONE IS HACKING WITH YOUR CHAIN!");
       System.exit(1);
