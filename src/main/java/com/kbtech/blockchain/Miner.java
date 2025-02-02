@@ -32,17 +32,16 @@ public class Miner {
     StopWatch stopWatch = new StopWatch();
     stopWatch.start();
 
-    long currentTime = stopWatch.getTime();
-
     while (!isValidHashDifficulty(hash, difficulty)) {
       nonce++;
       hash = hashToSHA256(String.format("%s%s%s%s%s",index , previousHash , timestamp , input , nonce));
       attempt++;
       if (attempt % 1000000 == 0) {
         million++;
-        long timeDiff = (stopWatch.getTime() - currentTime);
-        logger.debug("{} million hashes! took [{}s]", million, timeDiff);
-        currentTime = stopWatch.getTime();
+        stopWatch.split();
+        long timeDiff = stopWatch.getSplitTime() / 1000;
+        stopWatch.unsplit();
+        logger.debug("{} million hashes! so far has taken [{}s]", million, timeDiff);
       }
       logger.trace("Input: {}   - Hash: {}", msg, hash);
     }
@@ -52,8 +51,8 @@ public class Miner {
 
     stopWatch.stop();
 
-    logger.info("Input: {}   - Hash: {}", msg, hash);
-    logger.info("Input: {}  -  Nonce: {}  -  Hash: {}", input, nonce, hash);
+    logger.info("Input: {} - Hash: {}", msg, hash);
+    logger.info("Input: {} - Nonce: {}  -  Hash: {}", input, nonce, hash);
 
     return new Block(previousHash, timestamp, input, hash, nonce);
   }

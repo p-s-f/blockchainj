@@ -30,7 +30,7 @@ public class BlockchainMain {
       } catch (Exception e) {
         e.printStackTrace();
       }
-      Block nextBlock = miner.mineBlock("jeff the dog ate the cat when he went out in witby", 4, previousHash);
+      Block nextBlock = miner.mineBlock("jeff the dog ate the cat when he went out in witby", difficulty, previousHash, BlockChain.getInstance().getCurrentIndex());
       logger.info("Mined a block");
       blockChain.addBlock(nextBlock);
       previousHash = nextBlock.getHash();

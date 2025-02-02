@@ -13,7 +13,7 @@ import static com.kbtech.blockchain.util.HashUtil.hashToSHA256;
 
 public class BlockChain {
 
-  private final Map<Long, Block> blockChain = new HashMap<Long, Block>();
+  private final Map<Long, Block> blockChain = new HashMap<>();
   private long currentIndex = 0;
 
   private static BlockChain instance;
