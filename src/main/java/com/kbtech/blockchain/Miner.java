@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Date;
 
+import static com.kbtech.blockchain.BlockchainMain.hashCount;
 import static com.kbtech.blockchain.util.HashUtil.hashToSHA256;
 import static com.kbtech.blockchain.util.HashUtil.isValidHashDifficulty;
 
@@ -53,6 +54,7 @@ public class Miner {
 
     logger.info("Input: {} - Hash: {}", msg, hash);
     logger.info("Input: {} - Nonce: {}  -  Hash: {}", input, nonce, hash);
+    hashCount.add(million);
 
     return new Block(previousHash, timestamp, input, hash, nonce);
   }

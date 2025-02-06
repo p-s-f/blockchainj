@@ -1,16 +1,20 @@
 package com.kbtech.blockchain;
 
 import com.kbtech.blockchain.exceptions.BlockChainCorruptedException;
+import com.kbtech.blockchain.util.TimeUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BlockchainMain {
 
   final static Logger logger = LogManager.getLogger(BlockchainMain.class);
-  final static int difficulty = 7;
+  final static int difficulty = 6;
+
+  public static List<Integer> hashCount = new ArrayList<>();
 
   public static void main(String[] args) {
 
@@ -41,10 +45,15 @@ public class BlockchainMain {
     try {
       blockChain.validateChain();
       final double timeTookSeconds = (System.currentTimeMillis() - startTime) / 1000.0;
-      BigDecimal timeTookMinutes = BigDecimal.valueOf(timeTookSeconds / 60)
-              .setScale(1, RoundingMode.HALF_UP);
-       logger.info((String.format("Took %s minutes to generate 20 valid blocks at a difficulty level of [%s]", timeTookMinutes, difficulty)));
-        logger.info((String.format("Took %s seconds to generate 20 valid blocks at a difficulty level of [%s]", timeTookSeconds, difficulty)));
+      logger.info("Took {} to generate 20 valid blocks at a difficulty level of [{}]", TimeUtil.formatTime(timeTookSeconds), difficulty);
+      logger.info("Took {} seconds to generate 20 valid blocks at a difficulty level of [{}]", timeTookSeconds, difficulty);
+      logger.info(String.format("Average of %.2f million hashes to mine a block at %s difficulty", hashCount.stream()
+              .mapToInt(Integer::intValue)
+              .average()
+              .orElse(0.0), difficulty));
+      logger.debug("Hashes (in millions) per block were: {} ",hashCount.stream()
+              .map(String::valueOf)
+              .collect(Collectors.joining(", ")));
     } catch (BlockChainCorruptedException e) {
       logger.fatal("OH NOES - SOMEONE IS HACKING WITH YOUR CHAIN!");
       System.exit(1);
